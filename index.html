@@ -461,22 +461,13 @@
                         (手动存档)</span>
                 </button>
                 <!-- Settings & Exit (Split Row) -->
-                <div class="flex w-full gap-3">
-                    <button
-                        class="group flex-1 h-12 flex items-center justify-center bg-[#2a2323] rounded-lg border border-stone-600/50 hover:border-gold-muted/50 transition-all active:translate-y-0.5 shadow-lg">
-                        <span
-                            class="material-symbols-outlined text-stone-400 text-sm mr-2 group-hover:text-gold-muted transition-colors">settings_b_roll</span>
-                        <span
-                            class="text-stone-300 font-medium tracking-widest text-sm group-hover:text-gold-muted transition-colors">万象设定</span>
-                    </button>
-                    <button
-                        class="group flex-1 h-12 flex items-center justify-center bg-[#2a2323] rounded-lg border border-stone-600/50 hover:border-red-500/30 transition-all active:translate-y-0.5 shadow-lg">
-                        <span
-                            class="material-symbols-outlined text-stone-500 text-sm mr-2 group-hover:text-red-400 transition-colors">logout</span>
-                        <span
-                            class="text-stone-400 font-medium tracking-widest text-sm group-hover:text-red-400 transition-colors">别离江湖</span>
-                    </button>
-                </div>
+                <button
+                    class="group w-full h-12 flex items-center justify-center bg-[#2a2323] rounded-lg border border-stone-600/50 hover:border-gold-muted/50 transition-all active:translate-y-0.5 shadow-lg">
+                    <span
+                        class="material-symbols-outlined text-stone-400 text-sm mr-2 group-hover:text-gold-muted transition-colors">settings_b_roll</span>
+                    <span
+                        class="text-stone-300 font-medium tracking-widest text-sm group-hover:text-gold-muted transition-colors">万象设定</span>
+                </button>
             </div>
             <!-- Footer Info -->
             <div class="mt-4 flex flex-col items-center gap-1 opacity-40">
@@ -624,7 +615,7 @@
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2aET8Rg1IfJ3ToRKeCLSqy_bdmuALR8y59_3vwwG68sVbLsBWoCAHMOceje0-wLb0cVIkBYL6hDoZhJ1OlRzLE8Dmjr6hnQTeRK7jdJULfVwU3FqP-C2NWLz7jWgqTsd8NGgw969VMnr0OapEWVEeQqgfQsExlp9QVrcQoTAVWH-QkxbuWGNpMm8PBJihre4ugUY2fzcwdxdfmDq8ZO52D4IBd3HAh6TQ2rbNikO0fVL29CTxhhVRZ8B8BoLrvoxPcDEILoOKeYE" />
                         </div>
                         <h2 class="text-ink-black text-3xl font-light tracking-[0.6em] uppercase mb-2 opacity-90"
-                            style="text-shadow: 0 2px 10px rgba(0,0,0,0.1);">书生</h2>
+                            style="text-shadow: 0 2px 10px rgba(0,0,0,0.1);">清静峰主</h2>
                         <div class="w-px h-8 bg-gradient-to-b from-mist-cyan to-transparent mb-2 opacity-50"></div>
                         <p class="text-ink-light text-[10px] font-serif tracking-[0.3em] opacity-70">「 墨痕深似血 · 回响透古今 」
                         </p>
@@ -936,8 +927,9 @@
                                 style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADL_kSEAdbUqD8SsLTrQe-nF1FQNqhLbBUPShvRqCcwht7EO-XV_2FL5BG5dlzpkYTOi88tS8EVqgt6TCUiq0lLtMvS0EvbMt2ahNMaB31uo6P0fNFe8XGMD4MKYtMIGosxpImtXfAUhsgutSNQUD7UnTtYnEVclywE_n81WXpt8RVhGGUemwwSNxNgupVjW2huTgYnYaXM5n6yYLJgYUjHB4tALFIAt0xDsvrFkedyBHgEVngWSH_QvuRh216rtc5sAxAOutOIXU'); filter: invert(1);">
                             </div>
                             <div class="absolute inset-0 bg-red-950"></div>
-                            <div
-                                class="absolute inset-0 bg-gradient-to-r from-purple-900 via-red-700 to-red-600 w-[85%] shadow-[0_0_15px_rgba(220,38,38,0.8)]">
+                            <div id="boss-health-bar-fill"
+                                class="absolute inset-0 bg-gradient-to-r from-purple-900 via-red-700 to-red-600 shadow-[0_0_15px_rgba(220,38,38,0.8)]"
+                                style="width: 100%">
                                 <div class="absolute right-0 top-0 bottom-0 w-1 bg-white/40 animate-pulse">
                                 </div>
                             </div>
@@ -1252,7 +1244,126 @@
             </div>
         </div>
     </div>
+    <!-- PRE-BOSS INTRO MODAL -->
+    <div id="modal-boss-intro" style="display: none;"
+        class="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in">
+        <div
+            class="relative w-full max-w-2xl bg-[#1a0f0f] border border-red-900/50 shadow-2xl p-8 rounded-sm overflow-hidden flex flex-col items-center mx-4">
+            <!-- Decorative Background -->
+            <div
+                class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')] opacity-20">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-900/5 to-transparent"></div>
+
+            <!-- Content -->
+            <div class="relative z-10 flex flex-col items-center text-center space-y-6">
+                <div
+                    class="w-16 h-16 rounded-full bg-red-900/20 border border-red-500/30 flex items-center justify-center mb-2 shadow-[0_0_20px_rgba(220,38,38,0.3)]">
+                    <span class="material-symbols-outlined text-red-500 text-3xl animate-pulse">warning</span>
+                </div>
+
+                <h2 class="text-3xl font-serif font-bold text-red-100 tracking-[0.3em] text-shadow-glow">魔尊降临</h2>
+
+                <p class="text-stone-300 font-serif leading-relaxed text-sm md:text-base max-w-lg">
+                    洛冰河率领大批魔界精锐攻打苍穹山派。<br />
+                    结界将破，十二峰岌岌可危。<br />
+                    岳清源与沈清秋合力迎战，在苍穹山覆灭前击退强敌。
+                </p>
+
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-red-900/50 to-transparent my-2"></div>
+
+                <!-- Skill Explanations -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full text-left">
+                    <!-- Skill 1 -->
+                    <div class="bg-black/30 border border-yellow-600/20 p-3 rounded flex flex-col gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-yellow-500 text-sm">balance</span>
+                            <span class="text-yellow-500 font-bold text-xs tracking-wider">双剑合璧</span>
+                        </div>
+                        <p class="text-stone-400 text-[10px] leading-tight opacity-80">
+                            集合二人灵力发出强力一击。<br />
+                            <span class="text-stone-500 mt-1 block">伤害 = (岳战力 + 沈战力) x 5</span>
+                        </p>
+                    </div>
+
+                    <!-- Skill 2 -->
+                    <div class="bg-black/30 border border-red-600/20 p-3 rounded flex flex-col gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-red-500 text-sm">bloodtype</span>
+                            <span class="text-red-500 font-bold text-xs tracking-wider">玄肃·绝杀</span>
+                        </div>
+                        <p class="text-stone-400 text-[10px] leading-tight opacity-80">
+                            岳清源燃烧寿元，造成毁灭性伤害。<br />
+                            <span class="text-stone-500 mt-1 block">消耗大量气血 / 极高伤害</span>
+                        </p>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="bg-black/30 border border-cyan-600/20 p-3 rounded flex flex-col gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-cyan-500 text-sm">spa</span>
+                            <span class="text-cyan-500 font-bold text-xs tracking-wider">清静灵阵</span>
+                        </div>
+                        <p class="text-stone-400 text-[10px] leading-tight opacity-80">
+                            沈清秋以灵流护体，通过灵力治疗岳清源。<br />
+                            <span class="text-stone-500 mt-1 block">回复量 = (沈战力) x 1.5</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-red-900/50 to-transparent my-2"></div>
+
+                <button id="btn-start-boss-real"
+                    class="group relative px-8 py-3 bg-red-900/20 border border-red-500/50 hover:bg-red-900/40 hover:border-red-400 transition-all duration-300 w-full md:w-auto min-w-[200px] flex items-center justify-center gap-2 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-red-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-red-400 group-hover:text-white transition-colors">swords</span>
+                    <span
+                        class="text-red-100 font-serif font-bold tracking-[0.2em] group-hover:text-white transition-colors">迎
+                        战</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RANDOM EVENT MODAL -->
+    <div id="modal-random-event" style="display: none;"
+        class="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+        <div
+            class="relative w-full max-w-md bg-[#f9f8f4] border border-stone-300 shadow-2xl rounded-sm overflow-hidden flex flex-col items-center mx-4">
+            <!-- Header Image -->
+            <div id="modal-event-img" class="w-full h-32 bg-cover bg-center sepia-[0.3]"
+                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuArNkqeFjTVpNHRfJCcrJYo-JRQ6Dq01apUkXTRglFkDzYo6lglc0MlIvZeYTlvpUMAjdlOjUTrdJTszx1fjxbYRxjal4fteOox3-ujO744cWGht7Cz4MssVwCo7F1kjgjqS7Aeb_JRkGecwppamXRIokQvvGis5wEyAQji4rmI1wj7zd-2r5dE1R-HtBAlyv5uuxLkjjgCe_P0O3tfl49hZrtp50hrU5Dmy6dDpSVbM1xQdMt0Hjeu21b8-cHEVdCnGT0pitlXon4');">
+                <div class="w-full h-full bg-black/20 mix-blend-multiply"></div>
+            </div>
+
+            <div class="p-6 flex flex-col items-center text-center w-full">
+                <!-- Title -->
+                <div class="flex items-center gap-2 mb-3">
+                    <span id="modal-event-icon" class="material-symbols-outlined text-xl text-stone-600">spa</span>
+                    <h3 id="modal-event-title" class="text-xl font-serif font-bold text-ink-black tracking-[0.2em]">岁月静好
+                    </h3>
+                </div>
+
+                <div class="w-12 h-px bg-stone-300 mb-4"></div>
+
+                <!-- Content -->
+                <p id="modal-event-desc" class="text-ink-light font-serif text-sm leading-relaxed mb-6">
+                    今日苍穹山云雾缭绕，一切如常。
+                </p>
+
+                <button id="btn-event-confirm"
+                    class="w-full py-3 bg-[#2d1b1b] text-[#f0ebe5] font-serif font-bold tracking-[0.2em] rounded-sm hover:bg-[#3d2b2b] transition-colors shadow-md">
+                    确 定
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script> // Game State
+
 
         const defaultState = {
             turnCount: 1,
@@ -1304,6 +1415,7 @@
             bossDamageText: document.getElementById('boss-damage-text'),
             bossLogEntries: document.getElementById('boss-log-entries'),
             bossLogContainer: document.getElementById('boss-log-container'),
+            bossHealthBar: document.getElementById('boss-health-bar-fill'),
         }
 
             ;
@@ -1442,6 +1554,10 @@
                 label = '[剧情]';
                 labelClass = "font-serif text-[10px] text-mist-cyan font-medium mt-1.5 border border-mist-cyan/20 px-1.5 py-0.5 rounded-sm bg-mist-cyan/5 shrink-0 min-w-[3rem] text-center";
             }
+            if (type === 'relationship') {
+                label = '[羁绊]';
+                labelClass = "font-serif text-[10px] text-pink-500 font-medium mt-1.5 border border-pink-500/20 px-1.5 py-0.5 rounded-sm bg-pink-500/5 shrink-0 min-w-[3rem] text-center";
+            }
             if (type === 'battle') {
                 label = '[战斗]';
                 labelClass = "font-serif text-[10px] text-red-800 font-medium mt-1.5 border border-red-800/20 px-1.5 py-0.5 rounded-sm bg-red-800/5 shrink-0 min-w-[3rem] text-center";
@@ -1499,121 +1615,256 @@
         // Button 3: Interact (Dynamic)
         btns.interact.onclick = () => {
             if (state.hasActed) return;
+            handleInteractEvent();
+        };
 
-            // Scenario A: Locked
+        function handleInteractEvent() {
+            // Priority Check
+            const modal = {
+                ui: document.getElementById('modal-random-event'),
+                img: document.getElementById('modal-event-img'),
+                title: document.getElementById('modal-event-title'),
+                desc: document.getElementById('modal-event-desc'),
+                icon: document.getElementById('modal-event-icon'),
+            };
+
+            let evtData = {};
+
+            // Scenario A: Locked (Explain)
             if (!state.isRelationshipUnlocked) {
                 const rng = Math.random();
 
                 if (rng < 0.4) {
                     // Success
-                    state.isRelationshipUnlocked = true;
-                    state.bondValue += 20;
-                    log("【心结解开】岳清源终于将当年的真相和盘托出。沈清秋怔然良久，收起了折扇，眼角的戾气终于消散。（解释成功！关系进阶！）", 'story');
-                }
-
-                else {
+                    evtData = {
+                        title: "误会冰释",
+                        text: "岳清源终于将当年的真相和盘托出。沈清秋怔然良久，收起了折扇，眼角的戾气终于消散。",
+                        icon: "lock_open",
+                        imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAU92YrW4TIdZhcgJvGRuSq72-_hQGpCA_OnxYzeBQCWTqzAZF48fU9kNs6T58w0Y8ybAP1Xc7LvTbPDBvhDYsV_zypl7LYeHYxEF8mEMZyMzzdK3NBHINiUSihAosF71KcGXXfKKJJO2UCfvTeOgJor8PZhYHchfToHXVFWKwA-LpA9A2J6FKI5swyB9EBfEMcPm3rtSH1yOul3sr2BYsT85puK4rKzHky_a0JmGlapqrBS-1OCv_Z-I_com-kEWFLW7j1lv0YjgY", // Memory
+                        effect: () => {
+                            state.isRelationshipUnlocked = true;
+                            state.bondValue += 20;
+                            log("【误会冰释】岳清源终于将当年的真相和盘托出。沈清秋怔然良久，收起了折扇。（解释成功！关系进阶！）", 'relationship');
+                        }
+                    };
+                } else {
                     // Failure
-                    state.bondValue += 3;
-                    log("【词不达意】岳清源笨嘴拙舌，沉默了半天只说出了对不起。沈清秋不耐烦地打断了他。（解释失败...）", 'story');
+                    evtData = {
+                        title: "词不达意",
+                        text: "岳清源笨嘴拙舌，沉默了半天只说出了对不起。沈清秋不耐烦地打断了他。",
+                        icon: "lock",
+                        imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuDuQc_UoeWgt5mVQuzufp7suZy3io9m4vbr_HTItNyf5kJSFGC8pwpKcfm9PC7GIxf0-r3K075Rb7v8lAoJ2-qeg9TYQAwzk0Y58miH_y0hH4iedfoq5g0P0dkCGh0r-U-V6kLRT6WMJSSr4kYdDDgpGmcmN5TYrVmTa8-lEU2c9ynESRFs6yOX1lLCKQMcZFn8FQvCUVUdT5q-nsvAO09hwgCdZ0nbZtHNGX1VaZG1DQKBMSIj7L9F2OkmRKYy7Wk7cy2gFzmZeOw", // Broken
+                        effect: () => {
+                            state.bondValue += 3;
+                            log("【词不达意】岳清源笨嘴拙舌，沈清秋不耐烦地打断了他。（解释失败...）", 'story');
+                        }
+                    };
                 }
             }
-
             // Scenario B: Unlocked (Romantic Events)
             else {
                 const rng = Math.random();
 
                 if (rng < 0.4) {
-                    // 0 - 0.4 : Chess (40%)
-                    state.bondValue += 8;
-                    log("【闲敲棋子】竹舍幽静，二人对弈一局。不再是针锋相对，而是岁月静好。（羁绊 +8）", 'story');
-                }
-
-                else if (rng < 0.8) {
-                    // 0.4 - 0.8 : Wine (40%)
-                    state.bondValue += 10;
-                    log("【把酒言欢】沈清秋拿出了珍藏的竹叶青。这一次，没有人再提过去的苦痛，只有眼前的温存。（羁绊 +10）", 'story');
-                }
-
-                else {
-                    // 0.8 - 1.0 : Dual Cultivation (20%)
-                    state.yueHealth = Math.min(100, state.yueHealth + 30);
-                    state.yuePower += 15;
-                    state.shenPower += 15;
-                    state.bondValue += 15;
-                    log("【灵犀双修】红帐暖香，二人灵肉合一。以名入剑的旧伤在沈清秋的灵力安抚下彻底平息……（七哥气血大回。两人战力和羁绊都暴涨♥）", 'story');
+                    // Chess
+                    evtData = {
+                        title: "闲敲棋子",
+                        text: "竹舍幽静，二人对弈一局。不再是针锋相对，而是岁月静好。",
+                        icon: "casino",
+                        imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCQ9U64bDQ24wFHHW_VFGbbuKAe8KNtt1kO-hn7q8oEuqnDQlRae8WWZBceKJjFJTa3DwpNVBGZUB0_T5qItN-KX4qM_PXuBsSvrR7zoRO5dExdPkqDpLqcH-Kco0o_XdKvBI-4chez_4bpnRB2D1hWeKGueSOUOz02OL0yuSv_hBOO1Oce0Y7HDcn4Pm9EaUr9Ne7nYYFP8kjjbVkwZJzhlYvVQby0D0IB8usFzO6jaqf3biZWkksnflyf4HDHwlOGSl_QALKltio", // Peaceful
+                        effect: () => {
+                            state.bondValue += 8;
+                            log("【闲敲棋子】竹舍幽静，二人对弈一局。（羁绊 +8）", 'relationship');
+                        }
+                    };
+                } else if (rng < 0.8) {
+                    // Wine
+                    evtData = {
+                        title: "把酒言欢",
+                        text: "沈清秋拿出了珍藏的竹叶青。这一次，没有人再提过去的苦痛，只有眼前的温存。",
+                        icon: "wine_bar",
+                        imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuC2aET8Rg1IfJ3ToRKeCLSqy_bdmuALR8y59_3vwwG68sVbLsBWoCAHMOceje0-wLb0cVIkBYL6hDoZhJ1OlRzLE8Dmjr6hnQTeRK7jdJULfVwU3FqP-C2NWLz7jWgqTsd8NGgw969VMnr0OapEWVEeQqgfQsExlp9QVrcQoTAVWH-QkxbuWGNpMm8PBJihre4ugUY2fzcwdxdfmDq8ZO52D4IBd3HAh6TQ2rbNikO0fVL29CTxhhVRZ8B8BoLrvoxPcDEILoOKeYE", // Fan (Shen's)
+                        effect: () => {
+                            state.bondValue += 10;
+                            log("【把酒言欢】沈清秋拿出了珍藏的竹叶青，对饮至天明。（羁绊 +10）", 'relationship');
+                        }
+                    };
+                } else {
+                    // Dual Cultivation
+                    evtData = {
+                        title: "灵犀双修",
+                        text: "红帐暖香，二人灵肉合一。以名入剑的旧伤在沈清秋的灵力安抚下彻底平息……",
+                        icon: "favorite",
+                        imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAU92YrW4TIdZhcgJvGRuSq72-_hQGpCA_OnxYzeBQCWTqzAZF48fU9kNs6T58w0Y8ybAP1Xc7LvTbPDBvhDYsV_zypl7LYeHYxEF8mEMZyMzzdK3NBHINiUSihAosF71KcGXXfKKJJO2UCfvTeOgJor8PZhYHchfToHXVFWKwA-LpA9A2J6FKI5swyB9EBfEMcPm3rtSH1yOul3sr2BYsT85puK4rKzHky_a0JmGlapqrBS-1OCv_Z-I_com-kEWFLW7j1lv0YjgY", // Memory (Warm)
+                        effect: () => {
+                            state.yueHealth = Math.min(100, state.yueHealth + 30);
+                            state.yuePower += 15;
+                            state.shenPower += 15;
+                            state.bondValue += 15;
+                            log("【灵犀双修】红帐暖香，二人灵肉合一。（七哥气血大回，双方战力羁绊暴涨）", 'relationship');
+                        }
+                    };
                 }
             }
 
-            endPhase(); // Trigger lock
+            // UI Update
+            updateModalUI(modal, evtData);
+
+            // Set Confirm Action: End Phase (Don't advance day)
+            onModalConfirm = () => {
+                if (evtData.effect) evtData.effect();
+                endPhase();
+            };
+
+            // Show Modal
+            modal.ui.style.display = 'flex';
         }
 
-            ;
+        function updateModalUI(modal, data) {
+            modal.title.textContent = data.title;
+            modal.desc.textContent = data.text;
+            modal.icon.textContent = data.icon;
+            modal.img.style.backgroundImage = `url('${data.imgUrl}')`;
+        }
 
-        // Random Event Logic
-        function triggerRandomEvent() {
-            const roll = Math.random(); // 0.0 to 1.0
+        ;
+
+        // Random Event Logic (Refactored for Modal)
+        let onModalConfirm = null; // Callback for the shared modal
+
+        function handleDailyEvent() {
+            const nextDay = state.turnCount + 1;
+
+            // Priority 1: Day 20 Memory
+            if (nextDay === 20) {
+                advanceDay();
+                triggerMemoryEvent();
+                return;
+            }
+
+            // Priority 2: Day 30 Boss
+            if (nextDay >= 30) {
+                advanceDay();
+                startBossBattle();
+                return;
+            }
+
+            // Priority 3: Random Events (Modal)
+            const roll = Math.random();
+            const modal = {
+                ui: document.getElementById('modal-random-event'),
+                img: document.getElementById('modal-event-img'),
+                title: document.getElementById('modal-event-title'),
+                desc: document.getElementById('modal-event-desc'),
+                icon: document.getElementById('modal-event-icon'),
+                btn: document.getElementById('btn-event-confirm')
+            };
+
+            let evtData = {};
 
             // 1. Peaceful Day (0% - 20%)
             if (roll < 0.2) {
-                const peacefulLogs = ["【平安】今日苍穹山云雾缭绕，一切如常。",
-                    "【宁静】清静峰的竹叶被风吹得沙沙作响，难得的宁静一日。",
-                    "【无事】岁月静好，只有玄肃剑发出一声极轻的嗡鸣。"
-                ];
-                const randomText = peacefulLogs[Math.floor(Math.random() * peacefulLogs.length)];
-                log(randomText, 'system');
+                evtData = {
+                    title: "岁月静好",
+                    text: "今日苍穹山云雾缭绕，一切如常。",
+                    icon: "spa",
+                    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCQ9U64bDQ24wFHHW_VFGbbuKAe8KNtt1kO-hn7q8oEuqnDQlRae8WWZBceKJjFJTa3DwpNVBGZUB0_T5qItN-KX4qM_PXuBsSvrR7zoRO5dExdPkqDpLqcH-Kco0o_XdKvBI-4chez_4bpnRB2D1hWeKGueSOUOz02OL0yuSv_hBOO1Oce0Y7HDcn4Pm9EaUr9Ne7nYYFP8kjjbVkwZJzhlYvVQby0D0IB8usFzO6jaqf3biZWkksnflyf4HDHwlOGSl_QALKltio", // Landscape/Sword BG
+                    effect: () => log("【平安】今日苍穹山云雾缭绕，一切如常。", 'system')
+                };
             }
-
             // 2. Yue's Injury (20% - 40%)
             else if (roll < 0.4) {
-                state.yuePower -= 5;
-                log("【突发】深夜寒露重，岳清源旧伤隐隐作痛，灵力凝滞。（岳清源战力 -5）", 'story');
+                evtData = {
+                    title: "旧伤复发",
+                    text: "深夜寒露重，岳清源旧伤隐隐作痛，灵力凝滞。",
+                    icon: "medical_services",
+                    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuDuQc_UoeWgt5mVQuzufp7suZy3io9m4vbr_HTItNyf5kJSFGC8pwpKcfm9PC7GIxf0-r3K075Rb7v8lAoJ2-qeg9TYQAwzk0Y58miH_y0hH4iedfoq5g0P0dkCGh0r-U-V6kLRT6WMJSSr4kYdDDgpGmcmN5TYrVmTa8-lEU2c9ynESRFs6yOX1lLCKQMcZFn8FQvCUVUdT5q-nsvAO09hwgCdZ0nbZtHNGX1VaZG1DQKBMSIj7L9F2OkmRKYy7Wk7cy2gFzmZeOw", // Broken Sword
+                    effect: () => {
+                        state.yuePower -= 5;
+                        log("【突发】深夜寒露重，岳清源旧伤隐隐作痛，灵力凝滞。（岳清源战力 -5）", 'story');
+                    }
+                };
             }
-
             // 3. Rumors (40% - 60%)
             else if (roll < 0.6) {
-                state.shenPower -= 5;
-                log("【突发】闲言碎语传入清静峰，沈清秋面色阴沉，无心修炼。（沈清秋战力 -5）", 'story');
+                evtData = {
+                    title: "流言蜚语",
+                    text: "闲言碎语传入清静峰，沈清秋面色阴沉，无心修炼。",
+                    icon: "record_voice_over",
+                    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuC2aET8Rg1IfJ3ToRKeCLSqy_bdmuALR8y59_3vwwG68sVbLsBWoCAHMOceje0-wLb0cVIkBYL6hDoZhJ1OlRzLE8Dmjr6hnQTeRK7jdJULfVwU3FqP-C2NWLz7jWgqTsd8NGgw969VMnr0OapEWVEeQqgfQsExlp9QVrcQoTAVWH-QkxbuWGNpMm8PBJihre4ugUY2fzcwdxdfmDq8ZO52D4IBd3HAh6TQ2rbNikO0fVL29CTxhhVRZ8B8BoLrvoxPcDEILoOKeYE", // Fan
+                    effect: () => {
+                        state.shenPower -= 5;
+                        log("【突发】闲言碎语传入清静峰，沈清秋面色阴沉，无心修炼。（沈清秋战力 -5）", 'story');
+                    }
+                };
             }
-
             // 4. Heart Demon (60% - 80%)
             else if (roll < 0.8) {
-                state.yuePower -= 3;
-                state.shenPower -= 3;
-                log("【突发】心魔如影随形，二人在修炼时皆感到一阵心悸。（双方战力各 -3）", 'story');
+                evtData = {
+                    title: "心魔侵蚀",
+                    text: "似有心魔如影随形，二人在修炼时皆感到一阵心悸。",
+                    icon: "psychology_alt",
+                    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuBQQ_lbxyx_Zk--HbLInCVo85joBcchDLUHJv041vb_2VmkdDBQUi2EcFBrgcaCwPlnJYjuYEA9bJY5Ty2aiABbDm8K8d0gephDvXtqQH3q9ee0WLUwVpKbMPNGELMvPIIb3xMoxkM94_TVZJm9dqLCsw-deFnLNgfMGuZeef0Ey0-lRWw0ecfhHLVBxHnGg9oYQaXKnbHYsvqJBod4F6FtQQikZ7KDErXKd8VsmqELpyP5wT6R1Lssx0vPHLOBNhLEWvSkCRQzPAw", // Boss BG (Dark)
+                    effect: () => {
+                        state.yuePower -= 3;
+                        state.shenPower -= 3;
+                        log("【突发】心魔如影随形，二人在修炼时皆感到一阵心悸。（双方战力各 -3）", 'story');
+                    }
+                };
             }
-
             // 5. Sweet Memory (80% - 100%)
             else {
-                state.bondValue += 5;
-                log("【吉兆】沈清秋无意间翻出一张陈旧的字条，那是当年七哥留下的。神色稍缓。（羁绊 +5）", 'story');
+                evtData = {
+                    title: "往昔信物",
+                    text: "无意间翻出一张陈旧的字条，那是当年七哥留下的。神色稍缓。",
+                    icon: "favorite",
+                    imgUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuAU92YrW4TIdZhcgJvGRuSq72-_hQGpCA_OnxYzeBQCWTqzAZF48fU9kNs6T58w0Y8ybAP1Xc7LvTbPDBvhDYsV_zypl7LYeHYxEF8mEMZyMzzdK3NBHINiUSihAosF71KcGXXfKKJJO2UCfvTeOgJor8PZhYHchfToHXVFWKwA-LpA9A2J6FKI5swyB9EBfEMcPm3rtSH1yOul3sr2BYsT85puK4rKzHky_a0JmGlapqrBS-1OCv_Z-I_com-kEWFLW7j1lv0YjgY", // Memory BG
+                    effect: () => {
+                        state.bondValue += 5;
+                        log("【吉兆】沈清秋无意间翻出一张陈旧的字条，那是当年七哥留下的。神色稍缓。（羁绊 +5）", 'story');
+                    }
+                };
             }
 
+            // Update Modal UI
+            updateModalUI(modal, evtData);
+
+            // Set Action: Advance Day
+            onModalConfirm = () => {
+                advanceDay();
+                if (evtData.effect) evtData.effect();
+                updateUI();
+            };
+
+            // Show Modal and Wait for User
+            modal.ui.style.display = 'flex';
+        }
+
+        // Handle Confirm Button
+        const confirmBtn = document.getElementById('btn-event-confirm');
+        if (confirmBtn) {
+            confirmBtn.onclick = () => {
+                // 1. Hide Modal
+                document.getElementById('modal-random-event').style.display = 'none';
+
+                // 2. Execute Dynamic Action
+                if (typeof onModalConfirm === 'function') {
+                    onModalConfirm();
+                }
+            };
+        }
+
+        function advanceDay() {
+            state.turnCount++;
+            state.hasActed = false;
+            saveGame('auto');
             updateUI();
         }
 
-        // Button 4: Next Day
+        // Button 4: Next Day (Rest)
         btns.rest.onclick = () => {
             if (!state.hasActed) return; // Strict Turn Lock
-
-            state.turnCount++;
-            state.hasActed = false; // Reset lock for Phase A
-
-            // Auto-Save on new day
-            saveGame('auto');
-
-            if (state.turnCount === 20) {
-                triggerMemoryEvent();
-            }
-            else if (state.turnCount >= 30) {
-                startBossBattle();
-            }
-            else {
-                triggerRandomEvent();
-                // Log after random event for better flow
-                log("行动已结束，请点击【次日】推进时间。", 'system');
-            }
-
-            updateUI();
+            handleDailyEvent(); // Trigger the flow
         }
 
             ;
@@ -1667,11 +1918,16 @@
                 state = { ...defaultState, ...data.state };
                 startUI.log.innerHTML = data.logHTML;
 
-                // Switch screens
-                showScreen('screen-main');
-                // Force update UI logic
-                setTimeout(() => updateUI(), 50);
-                log(type === 'manual' ? "[系统] 读取手动存档成功。" : "[系统] 读取自动存档成功。", 'system');
+                // Check for Boss Battle Trigger (Day 30+)
+                if (state.turnCount >= 30) {
+                    startBossBattle();
+                } else {
+                    // Switch screens
+                    showScreen('screen-main');
+                    // Force update UI logic
+                    setTimeout(() => updateUI(), 50);
+                    log(type === 'manual' ? "[系统] 读取手动存档成功。" : "[系统] 读取自动存档成功。", 'system');
+                }
             } catch (e) {
                 console.error(e);
                 alert("存档损坏！");
@@ -1759,20 +2015,30 @@
             log("【决战】第30天已至。魔尊洛冰河降临！", 'story');
 
             setTimeout(() => {
+                const introModal = document.getElementById('modal-boss-intro');
+                if (introModal) introModal.style.display = 'flex';
+            }, 1000);
+        }
+
+        // Real Start Button Logic
+        const realStartBtn = document.getElementById('btn-start-boss-real');
+        if (realStartBtn) {
+            realStartBtn.onclick = () => {
+                document.getElementById('modal-boss-intro').style.display = 'none';
                 showScreen('screen-boss');
                 ui.bossHp.textContent = bossHP;
                 updateBossButtons();
-                updateBossUI(); // Initialize side panel stat bars
-            }, 1000);
+                updateBossUI();
+            }
         }
 
 
         function updateBossButtons() {
             // Button A: Combined Strike (Center) - Replaces Union
-            btns.bossUnion.innerHTML = `<span class="text-3xl font-serif text-yellow-500 font-black tracking-[0.2em] uppercase">双剑合璧</span><span class="text-xs text-yellow-500/50 font-mono tracking-[0.2em] mt-1">伤害: (战力)x5</span>`;
+            btns.bossUnion.innerHTML = `<span class="text-3xl font-serif text-yellow-500 font-black tracking-[0.2em] uppercase">双剑合璧</span><span class="text-xs text-yellow-500/50 font-mono tracking-[0.2em] mt-1">伤害: (两人战力)x5</span>`;
 
             // Button B: Support (Right) - Replaces BossButton 3
-            btns.bossFinish.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-cyan-500">清静灵阵</span><span class="text-[10px] text-cyan-500 uppercase">回复岳清源</span></div>`;
+            btns.bossFinish.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-cyan-500">清静灵阵</span><span class="text-[10px] text-cyan-500 uppercase">回复: (沈战力)x1.5</span></div>`;
 
             // Button C: Ultimate (Left) - Replaces Sacrifice
             btns.bossSacrifice.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-red-500">玄肃·绝杀</span><span class="text-[10px] text-red-500 uppercase">气血 -25 | 伤害 3000</span></div>`;
@@ -1791,6 +2057,10 @@
             if (ui.bossYueHealthBar) ui.bossYueHealthBar.style.height = yueHealthPercent + '%';
             if (ui.bossShenPowerBar) ui.bossShenPowerBar.style.height = shenPowerPercent + '%';
             if (ui.bossShenBondBar) ui.bossShenBondBar.style.height = bondPercent + '%';
+
+            // Update Boss Main Health Bar
+            const bossPercent = Math.max(0, (bossHP / 7500) * 100);
+            if (ui.bossHealthBar) ui.bossHealthBar.style.width = bossPercent + '%';
         }
 
         // Show animated damage number
