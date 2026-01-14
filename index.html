@@ -328,6 +328,22 @@
                 opacity: 1;
             }
         }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out forwards;
+        }
     </style>
 
     <!-- SCREEN 0: START MENU -->
@@ -426,13 +442,23 @@
             </button>
             <!-- Secondary Actions Container -->
             <div class="w-full flex flex-col gap-3">
-                <!-- Load Game -->
+                <!-- Continue (Auto Save) -->
+                <button id="btn-continue-game"
+                    class="group w-full h-12 flex items-center justify-center bg-[#2a2323] rounded-lg border border-stone-600/50 hover:border-gold-muted/50 transition-all active:translate-y-0.5 shadow-lg">
+                    <span
+                        class="material-symbols-outlined text-stone-400 text-sm mr-2 group-hover:text-gold-muted transition-colors">resume</span>
+                    <span
+                        class="text-stone-300 font-medium tracking-widest text-sm group-hover:text-gold-muted transition-colors">继续前缘
+                        (自动存档)</span>
+                </button>
+                <!-- Load Game (Manual) -->
                 <button id="btn-load-game"
                     class="group w-full h-12 flex items-center justify-center bg-[#2a2323] rounded-lg border border-stone-600/50 hover:border-gold-muted/50 transition-all active:translate-y-0.5 shadow-lg">
                     <span
                         class="material-symbols-outlined text-stone-400 text-sm mr-2 group-hover:text-gold-muted transition-colors">history_edu</span>
                     <span
-                        class="text-stone-300 font-medium tracking-widest text-sm group-hover:text-gold-muted transition-colors">载入纪事</span>
+                        class="text-stone-300 font-medium tracking-widest text-sm group-hover:text-gold-muted transition-colors">读取手扎
+                        (手动存档)</span>
                 </button>
                 <!-- Settings & Exit (Split Row) -->
                 <div class="flex w-full gap-3">
@@ -491,6 +517,9 @@
                         <span class="text-3xl font-light text-ink-black tracking-widest"><span
                                 id="turn-count-display">20</span></span>
                         <span class="text-xs text-ink-light/60 font-medium">/ 30 天</span>
+                        <div class="w-px h-4 bg-black/10 mx-2"></div>
+                        <span id="phase-display"
+                            class="text-xs font-serif font-bold tracking-widest text-vermilion-thread">辰时 · 筹备</span>
                     </div>
                 </div>
                 <div
@@ -561,11 +590,12 @@
                         </defs>
                         <path d="M 50 0 L 50 350 C 50 350 30 380 50 400 C 70 420 50 450 50 450 L 50 800" fill="none"
                             opacity="0.3" stroke="#C04851" stroke-width="2"></path>
-                        <path class="red-string-path"
+                        <path id="red-string-main" class="red-string-path"
                             d="M 50 0 L 50 320C 50 350, 20 360, 40 390C 60 410, 50 400, 50 400C 50 400, 40 390, 60 410C 80 440, 50 450, 50 480L 50 800"
                             fill="none" filter="url(#thread-glow)" stroke="#C04851" stroke-linecap="round"
                             stroke-opacity="1" stroke-width="2.5"></path>
-                        <circle class="animate-pulse knot-complex" cx="50" cy="400" fill="#C04851" r="5"></circle>
+                        <circle id="red-string-knot" class="animate-pulse knot-complex" cx="50" cy="400" fill="#C04851"
+                            r="5"></circle>
                     </svg>
                     <div
                         class="absolute top-1/2 -translate-y-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 bg-paper-base/30 backdrop-blur-sm p-2 rounded-full border border-vermilion-thread/10">
@@ -755,31 +785,7 @@
                     </div>
                 </div>
                 <div class="flex-1 flex justify-center gap-10">
-                    <!-- Stat 1 -->
-                    <div class="flex flex-col items-center h-full">
-                        <div class="mb-3 text-center">
-                            <div
-                                class="w-10 h-10 rounded-full bg-[#3d3215] border border-yellow-600/50 flex items-center justify-center shadow-[0_0_15px_rgba(234,179,8,0.2)]">
-                                <span class="material-symbols-outlined text-yellow-500 text-lg">psychology</span>
-                            </div>
-                        </div>
-                        <div
-                            class="relative flex-1 w-5 bg-black/60 rounded-full border border-yellow-900/30 shadow-inner overflow-hidden ring-1 ring-white/5">
-                            <div class="absolute inset-0 flex flex-col justify-between py-2 px-[2px] z-20 opacity-40">
-                                <div class="w-full h-px bg-yellow-900"></div>
-                                <div class="w-full h-px bg-yellow-900"></div>
-                                <div class="w-full h-px bg-yellow-900"></div>
-                                <div class="w-full h-px bg-yellow-900"></div>
-                                <div class="w-full h-px bg-yellow-900"></div>
-                            </div>
-                            <div
-                                class="absolute bottom-0 w-full h-[65%] bg-gradient-to-t from-yellow-800 via-yellow-500 to-yellow-200 shadow-[0_0_20px_rgba(234,179,8,0.6)] animate-[pulse-slow_3s_infinite]">
-                            </div>
-                        </div>
-                        <div class="mt-3"><span
-                                class="text-sm text-yellow-500/90 font-serif writing-vertical tracking-widest font-bold text-shadow-glow">神魂</span>
-                        </div>
-                    </div>
+                    <!-- Stat 1: Removed Shenhun as it's not a backend stat -->
                     <!-- Stat 2 -->
                     <div class="flex flex-col items-center h-full">
                         <div class="mb-3 text-center">
@@ -797,14 +803,15 @@
                                 <div class="w-full h-px bg-red-900"></div>
                                 <div class="w-full h-px bg-red-900"></div>
                             </div>
-                            <div
-                                class="absolute bottom-0 w-full h-[85%] bg-gradient-to-t from-red-950 via-red-800 to-red-600 shadow-[0_0_20px_rgba(220,38,38,0.6)]">
+                            <div id="boss-yue-health-bar"
+                                class="absolute bottom-0 w-full bg-gradient-to-t from-red-950 via-red-800 to-red-600 shadow-[0_0_20px_rgba(220,38,38,0.6)] transition-all duration-500"
+                                style="height: 85%">
                             </div>
                             <div class="absolute top-0 w-full h-full bg-red-500/20 animate-pulse z-10">
                             </div>
                         </div>
                         <div class="mt-3"><span
-                                class="text-sm text-red-500/90 font-serif writing-vertical tracking-widest font-bold text-shadow-glow">内伤</span>
+                                class="text-sm text-red-500/90 font-serif writing-vertical tracking-widest font-bold text-shadow-glow">寿元</span>
                         </div>
                     </div>
                 </div>
@@ -854,8 +861,9 @@
                                 <div class="w-full h-px bg-teal-900"></div>
                                 <div class="w-full h-px bg-teal-900"></div>
                             </div>
-                            <div
-                                class="absolute bottom-0 w-full h-[45%] bg-gradient-to-t from-teal-700 via-teal-500 to-teal-200 shadow-[0_0_15px_rgba(20,184,166,0.5)]">
+                            <div id="boss-shen-power-bar"
+                                class="absolute bottom-0 w-full bg-gradient-to-t from-teal-700 via-teal-500 to-teal-200 shadow-[0_0_15px_rgba(20,184,166,0.5)] transition-all duration-500"
+                                style="height: 45%">
                             </div>
                         </div>
                         <div class="mt-3"><span
@@ -866,25 +874,26 @@
                     <div class="flex flex-col items-center h-full">
                         <div class="mb-3 text-center">
                             <div
-                                class="w-10 h-10 rounded-full bg-[#f5f5f5] border border-gray-400/50 flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.1)]">
-                                <span class="material-symbols-outlined text-gray-500 text-lg">bedtime</span>
+                                class="w-10 h-10 rounded-full bg-[#fdf2f8] border border-pink-400/50 flex items-center justify-center shadow-[0_0_15px_rgba(236,72,153,0.2)]">
+                                <span class="material-symbols-outlined text-pink-500 text-lg">favorite</span>
                             </div>
                         </div>
                         <div
-                            class="relative flex-1 w-5 bg-gray-200/80 rounded-full border border-gray-400/20 shadow-inner overflow-hidden ring-1 ring-black/5">
+                            class="relative flex-1 w-5 bg-gray-200/80 rounded-full border border-pink-900/10 shadow-inner overflow-hidden ring-1 ring-black/5">
                             <div class="absolute inset-0 flex flex-col justify-between py-2 px-[2px] z-20 opacity-30">
-                                <div class="w-full h-px bg-gray-600"></div>
-                                <div class="w-full h-px bg-gray-600"></div>
-                                <div class="w-full h-px bg-gray-600"></div>
-                                <div class="w-full h-px bg-gray-600"></div>
-                                <div class="w-full h-px bg-gray-600"></div>
+                                <div class="w-full h-px bg-pink-900"></div>
+                                <div class="w-full h-px bg-pink-900"></div>
+                                <div class="w-full h-px bg-pink-900"></div>
+                                <div class="w-full h-px bg-pink-900"></div>
+                                <div class="w-full h-px bg-pink-900"></div>
                             </div>
-                            <div
-                                class="absolute bottom-0 w-full h-[20%] bg-gradient-to-t from-gray-400 via-gray-200 to-white shadow-[0_0_10px_rgba(255,255,255,0.8)]">
+                            <div id="boss-shen-bond-bar"
+                                class="absolute bottom-0 w-full bg-gradient-to-t from-pink-600 via-pink-400 to-pink-200 shadow-[0_0_15px_rgba(236,72,153,0.5)] transition-all duration-500"
+                                style="height: 0%">
                             </div>
                         </div>
                         <div class="mt-3"><span
-                                class="text-sm text-gray-600/90 font-serif writing-vertical tracking-widest font-bold">疲惫</span>
+                                class="text-sm text-pink-700/90 font-serif writing-vertical tracking-widest font-bold">羁绊</span>
                         </div>
                     </div>
                 </div>
@@ -922,7 +931,7 @@
                                     魔尊 · 洛冰河</h1>
                             </div>
                             <div class="text-sm text-gray-400 font-mono tracking-wider">
-                                HP: <span id="txt-boss-health" class="text-red-400 font-bold text-lg">---</span>/ ∞
+                                HP: <span id="txt-boss-health" class="text-red-400 font-bold text-lg">---</span>/ 10000
                             </div>
                         </div>
                         <div
@@ -991,11 +1000,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- Damage Numbers (Decorative for now, could actuate with JS) -->
-                <div class="absolute top-1/2 left-[55%] -translate-y-24 animate-bounce opacity-0 pointer-events-none"
-                    style="animation: fadeUp 3s infinite 0.5s;"><span
-                        class="text-boss-primary font-bold text-5xl font-display text-shadow-glow italic">-12,
-                        402</span></div>
+                <!-- Damage Numbers (Dynamic) -->
+                <div id="boss-damage-display"
+                    class="absolute top-1/2 left-[55%] -translate-y-24 pointer-events-none opacity-0"
+                    style="transition: opacity 0.3s;"><span id="boss-damage-text"
+                        class="text-boss-primary font-bold text-5xl font-display text-shadow-glow italic"></span></div>
             </div>
             <!-- Barrier/Seal Visual -->
             <div class="relative z-20 h-2 w-full flex items-center justify-center">
@@ -1034,12 +1043,16 @@
                 </div>
                 <!-- Battle Log Area - Dynamic -->
                 <div class="relative z-30 w-full px-4 md:px-[300px] mb-4 flex justify-center">
-                    <div class="w-full max-w-6xl bg-gradient-to-r from-transparent via-[#1c1917]/90 to-transparent border-y border-white/10 backdrop-blur-sm py-3 px-8 font-serif shadow-lg max-h-32 overflow-y-auto"
+                    <div class="w-full max-w-6xl bg-gradient-to-r from-transparent via-[#1c1917]/90 to-transparent border-y border-white/10 backdrop-blur-sm py-3 px-8 font-serif shadow-lg max-h-40 overflow-y-auto custom-scrollbar"
                         id="boss-log-container">
-                        <div class="flex items-center gap-6 opacity-90">
+                        <div
+                            class="flex items-center gap-4 mb-2 sticky top-0 bg-[#1c1917]/95 py-1 -mx-2 px-2 z-10 border-b border-white/5">
                             <span
-                                class="text-[10px] tracking-widest uppercase text-boss-primary/70 border border-boss-primary/20 px-2 py-0.5 bg-black/40">战斗日志</span>
-                            <span class="text-gray-300 text-sm tracking-wide" id="boss-log-text">战场寂静，杀机暗藏...</span>
+                                class="text-[10px] tracking-widest uppercase text-boss-primary/70 border border-boss-primary/20 px-2 py-0.5 bg-black/40 shrink-0">战斗日志</span>
+                            <div class="h-px flex-1 bg-white/10"></div>
+                        </div>
+                        <div id="boss-log-entries" class="flex flex-col gap-2">
+                            <div class="text-gray-300 text-sm tracking-wide">战场寂静，杀机暗藏...</div>
                         </div>
                     </div>
                 </div>
@@ -1253,7 +1266,7 @@
     </div>
     <script> // Game State
 
-        let state = {
+        const defaultState = {
             turnCount: 1,
             maxTurns: 30,
             yueHealth: 100, // Life Force
@@ -1263,9 +1276,11 @@
             hasActed: false, // Turn Lock
             isRelationshipUnlocked: false, // New Unlock State
             isBossBattle: false
-        }
+        };
 
-            ;
+        let state = { ...defaultState };
+
+        ;
 
         // DOM Elements
         const screens = {
@@ -1286,8 +1301,21 @@
             shenPowerText: document.getElementById('shen-power-display'),
             shenBondBar: document.getElementById('bond-bar'),
             bondCenterText: document.getElementById('bond-center-display'),
+            // Red String Elements
+            redStringPath: document.getElementById('red-string-main'),
+            redStringKnot: document.getElementById('red-string-knot'),
+
             log: document.getElementById('log-container'),
             bossHp: document.getElementById('txt-boss-health'),
+            phaseText: document.getElementById('phase-display'),
+            // Boss battle UI elements
+            bossYueHealthBar: document.getElementById('boss-yue-health-bar'),
+            bossShenPowerBar: document.getElementById('boss-shen-power-bar'),
+            bossShenBondBar: document.getElementById('boss-shen-bond-bar'), // Logic update: Fatigue -> Bond
+            bossDamageDisplay: document.getElementById('boss-damage-display'),
+            bossDamageText: document.getElementById('boss-damage-text'),
+            bossLogEntries: document.getElementById('boss-log-entries'),
+            bossLogContainer: document.getElementById('boss-log-container'),
         }
 
             ;
@@ -1336,6 +1364,34 @@
             if (ui.shenBondBar) ui.shenBondBar.style.width = visualBond + '%';
             if (ui.bondCenterText) ui.bondCenterText.textContent = state.bondValue;
 
+            // Red String Visual State Logic
+            if (ui.redStringPath && ui.redStringKnot) {
+                if (state.bondValue < 40) {
+                    // Broken State: Continuous from top/bottom but gap in center
+                    // Top segment: 0 to 360 | Bottom segment: 440 to 800
+                    ui.redStringPath.setAttribute('d', 'M 50 0 L 50 350 M 50 450 L 50 800');
+                    ui.redStringPath.setAttribute('stroke-width', '2');
+                    ui.redStringPath.style.opacity = '0.7';
+                    // Ensure dashed array is removed/reset so it's not "intermittent" style
+                    ui.redStringPath.style.strokeDasharray = 'none';
+                    ui.redStringKnot.style.opacity = '0';
+                }
+                else if (state.bondValue < 80) {
+                    // Thin Connection State
+                    ui.redStringPath.setAttribute('d', 'M 50 0 L 50 800'); // Straight, simple line
+                    ui.redStringPath.setAttribute('stroke-width', '1'); // Thin
+                    ui.redStringPath.style.opacity = '0.8';
+                    ui.redStringKnot.style.opacity = '0';
+                }
+                else {
+                    // Complete State (Original)
+                    ui.redStringPath.setAttribute('d', 'M 50 0 L 50 320C 50 350, 20 360, 40 390C 60 410, 50 400, 50 400C 50 400, 40 390, 60 410C 80 440, 50 450, 50 480L 50 800');
+                    ui.redStringPath.setAttribute('stroke-width', '2.5');
+                    ui.redStringPath.style.opacity = '1';
+                    ui.redStringKnot.style.opacity = '1';
+                }
+            }
+
             // Button 3 : Dynamic Update
             if (state.isRelationshipUnlocked) {
                 btns.interact.innerHTML = `<span class="material-symbols-outlined text-pink-400 group-hover:text-pink-600 transition-colors font-light text-xl">favorite</span>
@@ -1356,12 +1412,24 @@
                     if (btn) btn.disabled = true;
                 });
                 if (btns.rest) btns.rest.disabled = false;
+
+                // Update Phase Text
+                if (ui.phaseText) {
+                    ui.phaseText.textContent = "戌时 · 休憩";
+                    ui.phaseText.className = "text-xs font-serif font-bold tracking-widest text-ink-light/50";
+                }
             } else {
                 // PHASE A: New Day -> Enable Actions, Disable Next Day
                 actionBtns.forEach(btn => {
                     if (btn) btn.disabled = false;
                 });
                 if (btns.rest) btns.rest.disabled = true;
+
+                // Update Phase Text
+                if (ui.phaseText) {
+                    ui.phaseText.textContent = "辰时 · 筹备";
+                    ui.phaseText.className = "text-xs font-serif font-bold tracking-widest text-vermilion-thread";
+                }
             }
 
             if (state.yueHealth <= 0) {
@@ -1386,13 +1454,21 @@
                 label = '[剧情]';
                 labelClass = "font-serif text-[10px] text-mist-cyan font-medium mt-1.5 border border-mist-cyan/20 px-1.5 py-0.5 rounded-sm bg-mist-cyan/5 shrink-0 min-w-[3rem] text-center";
             }
-            else if (type === 'battle') {
+            if (type === 'battle') {
                 label = '[战斗]';
                 labelClass = "font-serif text-[10px] text-red-800 font-medium mt-1.5 border border-red-800/20 px-1.5 py-0.5 rounded-sm bg-red-800/5 shrink-0 min-w-[3rem] text-center";
 
-                const bossLogText = document.getElementById('boss-log-text');
-                if (bossLogText) {
-                    bossLogText.textContent = msg;
+                // Add to boss log entries (multiple lines)
+                if (ui.bossLogEntries) {
+                    const logEntry = document.createElement('div');
+                    logEntry.className = 'text-gray-300 text-sm tracking-wide animate-fade-in';
+                    logEntry.textContent = msg;
+                    ui.bossLogEntries.appendChild(logEntry);
+
+                    // Scroll to bottom
+                    if (ui.bossLogContainer) {
+                        ui.bossLogContainer.scrollTop = ui.bossLogContainer.scrollHeight;
+                    }
                 }
             }
 
@@ -1408,6 +1484,7 @@
 
         function endPhase() {
             state.hasActed = true;
+            saveGame('auto'); // Auto-save after action
             updateUI();
         }
 
@@ -1533,8 +1610,8 @@
             state.turnCount++;
             state.hasActed = false; // Reset lock for Phase A
 
-            // Auto-Save
-            saveGame();
+            // Auto-Save on new day
+            saveGame('auto');
 
             if (state.turnCount === 20) {
                 triggerMemoryEvent();
@@ -1561,49 +1638,52 @@
         }
 
         // --- START SCREEN & SAVE/LOAD SYSTEM ---
-        const SAVE_KEY = 'fate_reincarnation_save_v1';
+        const MANUAL_SAVE_KEY = 'fate_reincarnation_save_v1';
+        const AUTO_SAVE_KEY = 'fate_reincarnation_autosave_v1';
 
         // Extended UI elements for Start Screen
-        // (We append to existing ui/btns objects if possible, or just use direct lookups here for safety)
         const startUI = {
             startBtn: document.getElementById('btn-start-game'),
+            continueBtn: document.getElementById('btn-continue-game'),
             loadBtn: document.getElementById('btn-load-game'),
-            log: document.getElementById('log-container') // Ensure we have this
+            log: document.getElementById('log-container')
         };
 
-        function saveGame() {
+        function saveGame(type = 'auto') {
+            const key = type === 'manual' ? MANUAL_SAVE_KEY : AUTO_SAVE_KEY;
+
             // Save current state + innerHTML of log
             const saveData = {
                 state: state,
                 logHTML: startUI.log.innerHTML,
                 timestamp: new Date().getTime()
             };
-            localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
+            localStorage.setItem(key, JSON.stringify(saveData));
 
-            // Feedback (Transient) on Cultivate button as a hack/notification
-            if (btns && btns.cultivate) {
-                const originalText = btns.cultivate.innerHTML; // Store original
-                // Only show if button is visible/active? Actually let's just use log for now or alert?
-                // Better: Log it.
-                // log("【系统】游戏已自动保存。", 'system'); // Recursion risk if log calls save? No.
+            if (type === 'auto') {
+                console.log('Auto-saved state.');
             }
         }
 
-        function loadGame() {
-            const raw = localStorage.getItem(SAVE_KEY);
+        function loadGame(type = 'manual') {
+            const key = type === 'manual' ? MANUAL_SAVE_KEY : AUTO_SAVE_KEY;
+            const raw = localStorage.getItem(key);
+
             if (!raw) {
-                alert("没有找到存档！");
+                alert(type === 'manual' ? "没有找到手动存档！" : "没有找到自动存档！");
                 return;
             }
             try {
                 const data = JSON.parse(raw);
-                state = data.state;
+                // Safe merge of state
+                state = { ...defaultState, ...data.state };
                 startUI.log.innerHTML = data.logHTML;
 
                 // Switch screens
                 showScreen('screen-main');
-                updateUI();
-                log("[系统] 读取存档成功。", 'system');
+                // Force update UI logic
+                setTimeout(() => updateUI(), 50);
+                log(type === 'manual' ? "[系统] 读取手动存档成功。" : "[系统] 读取自动存档成功。", 'system');
             } catch (e) {
                 console.error(e);
                 alert("存档损坏！");
@@ -1614,32 +1694,34 @@
         if (startUI.startBtn) {
             startUI.startBtn.onclick = () => {
                 // New Game - Reset State
-
-                state.turnCount = 1;
-                state.yueHealth = 100;
-                state.yuePower = 50;
-                state.shenPower = 50;
-                state.bondValue = 0;
-                state.isRelationshipUnlocked = false;
-                state.hasActed = false;
-                state.isBossBattle = false;
+                state = { ...defaultState };
 
                 startUI.log.innerHTML = `<div class="flex gap-4 items-start"><span class="text-xs font-mono text-gray-600">[系统]</span><p class="text-base font-serif text-gray-800">欢迎来到宿命轮回。</p></div>`;
+
+                // Initial Auto-save so they can continue if they quit immediately
+                saveGame('auto');
+
                 showScreen('screen-main');
                 updateUI();
             };
         }
 
+        if (startUI.continueBtn) {
+            startUI.continueBtn.onclick = () => {
+                loadGame('auto');
+            };
+        }
+
         if (startUI.loadBtn) {
             startUI.loadBtn.onclick = () => {
-                loadGame();
+                loadGame('manual');
             };
         }
 
         // Manual Save Button Handler
         if (btns.save) {
             btns.save.onclick = () => {
-                saveGame();
+                saveGame('manual');
                 // Visual feedback
                 const originalHTML = btns.save.innerHTML;
                 btns.save.innerHTML = `<span class="material-symbols-outlined text-green-400 text-base">check_circle</span><span>已存档!</span>`;
@@ -1675,19 +1757,21 @@
 
         // --- BOSS BATTLE ---
 
-        let bossHP = 2000;
+        let bossHP = 10000;
 
         function startBossBattle() {
             state.isBossBattle = true;
-            bossHP = 2000; // Reset for safety
+            bossHP = 10000; // Reset for safety
             log("【决战】第30天已至。魔尊洛冰河降临！", 'story');
 
             setTimeout(() => {
                 showScreen('screen-boss');
                 ui.bossHp.textContent = bossHP;
                 updateBossButtons();
+                updateBossUI(); // Initialize side panel stat bars
             }, 1000);
         }
+
 
         function updateBossButtons() {
             // Button A: Combined Strike (Center) - Replaces Union
@@ -1697,8 +1781,59 @@
             btns.bossFinish.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-cyan-500">清静灵阵</span><span class="text-[10px] text-cyan-500 uppercase">Heal Yue</span></div>`;
 
             // Button C: Ultimate (Left) - Replaces Sacrifice
-            btns.bossSacrifice.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-red-500">玄肃·绝杀</span><span class="text-[10px] text-red-500 uppercase">HP -30 | DMG 800</span></div>`;
+            btns.bossSacrifice.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-red-500">玄肃·绝杀</span><span class="text-[10px] text-red-500 uppercase">HP -30 | DMG 2500</span></div>`;
         }
+
+        // Update Boss Battle Side Panels
+        function updateBossUI() {
+            // Calculate percentages for bars
+            // Yue Health: Direct percentage (0-100)
+            const yueHealthPercent = Math.max(0, state.yueHealth);
+            // Shen Power: Based on shenPower, assuming max around 200 for visual purposes
+            const shenPowerPercent = Math.min(100, Math.max(5, (state.shenPower / 200) * 100));
+            // Bond: Direct percentage (0-100)
+            const bondPercent = Math.min(100, Math.max(0, state.bondValue));
+
+            if (ui.bossYueHealthBar) ui.bossYueHealthBar.style.height = yueHealthPercent + '%';
+            if (ui.bossShenPowerBar) ui.bossShenPowerBar.style.height = shenPowerPercent + '%';
+            if (ui.bossShenBondBar) ui.bossShenBondBar.style.height = bondPercent + '%';
+        }
+
+        // Show animated damage number
+        function showDamageNumber(damage, isHeal = false) {
+            if (!ui.bossDamageDisplay || !ui.bossDamageText) return;
+
+            // Format damage with comma
+            const formattedDmg = damage.toLocaleString();
+            const prefix = isHeal ? '+' : '-';
+            ui.bossDamageText.textContent = prefix + formattedDmg;
+
+            // Set color based on heal or damage
+            ui.bossDamageText.className = isHeal
+                ? 'text-green-400 font-bold text-5xl font-display text-shadow-glow italic'
+                : 'text-boss-primary font-bold text-5xl font-display text-shadow-glow italic';
+
+            // Show the display
+            ui.bossDamageDisplay.style.opacity = '1';
+            ui.bossDamageDisplay.style.transform = 'translateY(-24px)';
+
+            // Animate upward and fade out
+            let opacity = 1;
+            let translateY = -24;
+            const animInterval = setInterval(() => {
+                opacity -= 0.03;
+                translateY -= 2;
+                ui.bossDamageDisplay.style.opacity = opacity;
+                ui.bossDamageDisplay.style.transform = `translateY(${translateY}px)`;
+
+                if (opacity <= 0) {
+                    clearInterval(animInterval);
+                    ui.bossDamageDisplay.style.opacity = '0';
+                    ui.bossDamageDisplay.style.transform = 'translateY(-24px)';
+                }
+            }, 30);
+        }
+
 
         // Boss Actions
 
@@ -1708,10 +1843,11 @@
             setTimeout(() => {
                 if (bossHP <= 0) return; // Boss dead, no counter
 
-                const dmg = 30;
+                const dmg = 50;
                 state.yueHealth -= dmg;
-                log("洛冰河反手一击，心魔剑气直冲岳清源胸口！(岳清源 HP -30)", 'battle');
+                log("洛冰河反手一击，心魔剑气直冲岳清源胸口！(岳清源 HP -50)", 'battle');
                 updateUI();
+                updateBossUI(); // Update side panel bars
 
                 // Check Death (BE immediate trigger)
                 if (state.yueHealth <= 0) {
@@ -1746,6 +1882,8 @@
             ui.bossHp.textContent = Math.max(0, bossHP);
 
             log(`【双剑合璧】二人默契配合，共同击出灵力暴击，击向洛冰河。（BOSS 受到 ${dmg} 点伤害）`, 'battle');
+            showDamageNumber(dmg); // Show animated damage
+            updateBossUI(); // Update side panel bars
 
             bossCounterAttack();
         };
@@ -1758,8 +1896,9 @@
             state.yueHealth = Math.min(100, state.yueHealth + heal);
 
             log(`【清静灵阵】沈清秋展开灵阵护住岳清源心脉。（岳清源气血恢复 ${heal}）`, 'battle');
-
+            showDamageNumber(heal, true); // Show animated heal number
             updateUI();
+            updateBossUI(); // Update side panel bars
             bossCounterAttack();
         };
 
@@ -1770,6 +1909,7 @@
             // Cost
             state.yueHealth -= 30;
             updateUI(); // Immediate update to show cost
+            updateBossUI(); // Update side panel bars
 
             if (state.yueHealth <= 0) {
                 log("【警告】岳清源强行拔出玄肃，寿元耗尽...", 'battle');
@@ -1777,11 +1917,12 @@
                 return;
             }
 
-            const dmg = 800;
+            const dmg = 2500;
             bossHP -= dmg;
             ui.bossHp.textContent = Math.max(0, bossHP);
 
-            log("【玄肃·绝杀】岳清源强行拔出玄肃，寿元燃烧！惊天剑气斩给了洛冰河重重一击！(BOSS 受到 800 伤害)", 'battle');
+            log("【玄肃·绝杀】岳清源强行拔出玄肃，寿元燃烧！惊天剑气斩给了洛冰河重重一击！(BOSS 受到 2500 伤害)", 'battle');
+            showDamageNumber(dmg); // Show animated damage
 
             bossCounterAttack();
         };
@@ -1829,8 +1970,31 @@
         btns.restartNE.onclick = () => showScreen('screen-start');
         btns.restartBE.onclick = () => showScreen('screen-start');
 
+        // Check for auto-save on init
+        function checkAutoSave() {
+            const raw = localStorage.getItem(AUTO_SAVE_KEY);
+            if (raw && startUI.continueBtn) {
+                try {
+                    JSON.parse(raw); // Check validity
+                    startUI.continueBtn.disabled = false;
+                    startUI.continueBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    startUI.continueBtn.querySelector('span:last-child').textContent = "继续前缘 (自动存档)";
+                } catch (e) {
+                    // Invalid
+                    startUI.continueBtn.disabled = true;
+                    startUI.continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    startUI.continueBtn.querySelector('span:last-child').textContent = "继续前缘 (无存档)";
+                }
+            } else if (startUI.continueBtn) {
+                startUI.continueBtn.disabled = true;
+                startUI.continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                startUI.continueBtn.querySelector('span:last-child').textContent = "继续前缘 (无存档)";
+            }
+        }
+
         // Init
         updateUI();
+        checkAutoSave(); // Run check
 
         // Check for save on init but default to start screen
         showScreen('screen-start');
