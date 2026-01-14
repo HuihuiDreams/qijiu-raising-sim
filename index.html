@@ -781,7 +781,7 @@
                         岳清源</h2>
                     <div
                         class="text-[10px] text-gray-500 font-mono mt-1 uppercase tracking-[0.2em] flex justify-between">
-                        <span>SECT LEADER</span><span class="text-red-900 font-bold">UNK-001</span>
+                        <span>苍穹山掌门</span><span class="text-red-900 font-bold">玄肃</span>
                     </div>
                 </div>
                 <div class="flex-1 flex justify-center gap-10">
@@ -839,7 +839,7 @@
                         沈清秋</h2>
                     <div
                         class="text-[10px] text-gray-500 font-mono mt-1 uppercase tracking-[0.2em] flex justify-between flex-row-reverse">
-                        <span>PEAK LORD</span><span class="text-green-800 font-bold">SQQ-009</span>
+                        <span>清静峰主</span><span class="text-green-800 font-bold">修雅</span>
                     </div>
                 </div>
                 <!-- Stats -->
@@ -911,13 +911,9 @@
             <!-- Top Status Bar -->
             <div
                 class="absolute top-0 left-0 w-full z-50 flex items-start justify-between px-8 py-4 pointer-events-none bg-gradient-to-b from-black/90 to-transparent h-32 pl-[300px] pr-[300px]">
-                <div class="flex flex-col pointer-events-auto"><button
-                        class="flex items-center gap-2 hover:text-boss-primary transition-colors mb-1"><span
-                            class="material-symbols-outlined text-white/80">arrow_back_ios_new</span><span
-                            class="text-white/60 text-sm tracking-widest font-serif">RETREAT</span></button>
+                <div class="flex flex-col pointer-events-auto pt-2">
                     <div class="flex items-center gap-2 text-xs text-gray-500 uppercase tracking-[0.2em]">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>Final
-                        Phase: Karma
+                        <span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>终极阶段: 因果
                     </div>
                 </div>
                 <!-- Boss Health & Name -->
@@ -931,7 +927,7 @@
                                     魔尊 · 洛冰河</h1>
                             </div>
                             <div class="text-sm text-gray-400 font-mono tracking-wider">
-                                HP: <span id="txt-boss-health" class="text-red-400 font-bold text-lg">---</span>/ 10000
+                                气血: <span id="txt-boss-health" class="text-red-400 font-bold text-lg">---</span>/ 7500
                             </div>
                         </div>
                         <div
@@ -979,6 +975,7 @@
                             class="material-symbols-outlined text-white/80">settings</span></button>
                 </div>
             </div>
+
             <!-- Visual Space -->
             <div class="relative h-[55%] w-full overflow-hidden bg-[#1a0520] flex items-center justify-center">
                 <div class="absolute inset-0 bg-cover bg-center opacity-60 mix-blend-overlay"
@@ -1028,11 +1025,8 @@
                 </div>
                 <!-- Seal Text -->
                 <div
-                    class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-[200px] text-xl text-boss-primary/80 font-serif tracking-[1em] opacity-80 whitespace-nowrap hidden md:block">
+                    class="absolute top-[130%] left-1/2 -translate-x-1/2 text-xl text-boss-primary/80 font-serif tracking-[1em] opacity-80 whitespace-nowrap hidden md:block">
                     金光屏障 </div>
-                <div
-                    class="absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-[200px] text-xl text-boss-primary/80 font-serif tracking-[1em] opacity-80 whitespace-nowrap text-right hidden md:block">
-                    SEAL ACTIVE </div>
             </div>
             <!-- Bottom Controls -->
             <div class="relative h-[45%] w-full bg-[#121214] flex flex-col justify-end">
@@ -1073,12 +1067,8 @@
                                     class="material-symbols-outlined text-red-500 group-hover:text-red-200 text-3xl transition-colors">bloodtype</span>
                             </div>
                             <div class="text-left">
-                                <!-- Dynamic JS will inject text
-                                                                                        here usually, but static
-                                                                                        structure helps --><span
-                                    class="block text-2xl font-serif text-red-100/90 tracking-[0.25em] font-bold group-hover:text-white group-hover:text-shadow-glow transition-all">血祭</span><span
-                                    class="text-[10px] text-red-500/60 uppercase tracking-widest group-hover:text-red-400 font-mono">Blood
-                                    Sacrifice</span>
+                                <span
+                                    class="block text-2xl font-serif text-red-100/90 tracking-[0.25em] font-bold group-hover:text-white group-hover:text-shadow-glow transition-all">血祭</span>
                             </div>
                         </div>
                     </button>
@@ -1103,8 +1093,7 @@
                                 </div><span
                                     class="h-px w-16 bg-gradient-to-l from-transparent to-boss-primary/60"></span>
                             </div><span
-                                class="text-3xl font-serif text-boss-primary font-black tracking-[0.4em] text-shadow-glow group-hover:text-white transition-colors">双魂共鸣</span><span
-                                class="text-xs text-yellow-500/50 font-mono tracking-[0.5em] mt-1 group-hover:text-yellow-200 uppercase">Resonance</span>
+                                class="text-3xl font-serif text-boss-primary font-black tracking-[0.4em] text-shadow-glow group-hover:text-white transition-colors">双魂共鸣</span>
                         </div>
                         <div
                             class="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-boss-primary/40 group-hover:border-boss-primary/80 transition-colors">
@@ -1129,9 +1118,8 @@
                                     class="material-symbols-outlined text-cyan-500 group-hover:text-cyan-200 text-3xl transition-colors">spa</span>
                             </div>
                             <div class="text-right"><span
-                                    class="block text-2xl font-serif text-cyan-100/90 tracking-[0.25em] font-bold group-hover:text-white group-hover:text-shadow-glow transition-all">灵力支撑</span><span
-                                    class="text-[10px] text-cyan-500/60 uppercase tracking-widest group-hover:text-cyan-400 font-mono">Spiritual
-                                    Aid</span></div>
+                                    class="block text-2xl font-serif text-cyan-100/90 tracking-[0.25em] font-bold group-hover:text-white group-hover:text-shadow-glow transition-all">灵力支撑</span>
+                            </div>
                         </div>
                     </button>
                 </div>
@@ -1170,7 +1158,7 @@
                     <div class="flex items-center justify-center gap-4 mb-3 opacity-90">
                         <div class="h-px w-16 bg-gradient-to-r from-transparent to-primary"></div><span
                             id="txt-ending-label-ne"
-                            class="text-primary font-serif font-bold tracking-[0.3em] text-xs lg:text-sm uppercase text-shadow-sm">Normal
+                            class="text-primary font-serif font-bold tracking-[0.3em] text-xs lg:text-sm uppercase text-shadow-sm">
                             End</span>
                         <div class="h-px w-16 bg-gradient-to-l from-transparent to-primary"></div>
                     </div>
@@ -1220,7 +1208,7 @@
                 <div class="flex flex-col items-center gap-1 opacity-70">
                     <div
                         class="flex items-center gap-2 text-red-500/80 tracking-[0.3em] text-xs font-bold uppercase border border-red-900/30 bg-black/40 px-3 py-1 rounded-sm backdrop-blur-sm">
-                        <span class="material-symbols-outlined text-sm">broken_image</span>Bad
+                        <span class="material-symbols-outlined text-sm">broken_image</span>
                         Ending
                     </div>
                 </div>
@@ -1757,11 +1745,17 @@
 
         // --- BOSS BATTLE ---
 
-        let bossHP = 10000;
+        let bossHP = 7500;
 
         function startBossBattle() {
             state.isBossBattle = true;
-            bossHP = 10000; // Reset for safety
+            bossHP = 7500; // Reset for safety
+
+            // Clear Boss Log
+            if (ui.bossLogEntries) {
+                ui.bossLogEntries.innerHTML = '<div class="text-gray-300 text-sm tracking-wide">战场寂静，杀机暗藏...</div>';
+            }
+
             log("【决战】第30天已至。魔尊洛冰河降临！", 'story');
 
             setTimeout(() => {
@@ -1775,13 +1769,13 @@
 
         function updateBossButtons() {
             // Button A: Combined Strike (Center) - Replaces Union
-            btns.bossUnion.innerHTML = `<span class="text-3xl font-serif text-yellow-500 font-black tracking-[0.2em] uppercase">双剑合璧</span><span class="text-xs text-yellow-500/50 font-mono tracking-[0.2em] mt-1">DMG: (战力)x3</span>`;
+            btns.bossUnion.innerHTML = `<span class="text-3xl font-serif text-yellow-500 font-black tracking-[0.2em] uppercase">双剑合璧</span><span class="text-xs text-yellow-500/50 font-mono tracking-[0.2em] mt-1">伤害: (战力)x5</span>`;
 
             // Button B: Support (Right) - Replaces BossButton 3
-            btns.bossFinish.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-cyan-500">清静灵阵</span><span class="text-[10px] text-cyan-500 uppercase">Heal Yue</span></div>`;
+            btns.bossFinish.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-cyan-500">清静灵阵</span><span class="text-[10px] text-cyan-500 uppercase">回复岳清源</span></div>`;
 
             // Button C: Ultimate (Left) - Replaces Sacrifice
-            btns.bossSacrifice.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-red-500">玄肃·绝杀</span><span class="text-[10px] text-red-500 uppercase">HP -30 | DMG 2500</span></div>`;
+            btns.bossSacrifice.innerHTML = `<div class="text-center"><span class="block text-2xl font-serif font-bold text-red-500">玄肃·绝杀</span><span class="text-[10px] text-red-500 uppercase">气血 -25 | 伤害 3000</span></div>`;
         }
 
         // Update Boss Battle Side Panels
@@ -1843,9 +1837,9 @@
             setTimeout(() => {
                 if (bossHP <= 0) return; // Boss dead, no counter
 
-                const dmg = 50;
+                const dmg = 40;
                 state.yueHealth -= dmg;
-                log("洛冰河反手一击，心魔剑气直冲岳清源胸口！(岳清源 HP -50)", 'battle');
+                log("洛冰河反手一击，心魔剑气直冲岳清源胸口！(岳清源 气血 -40)", 'battle');
                 updateUI();
                 updateBossUI(); // Update side panel bars
 
@@ -1877,11 +1871,11 @@
         btns.bossUnion.onclick = () => {
             if (bossHP <= 0 || state.yueHealth <= 0) return;
 
-            const dmg = (state.yuePower + state.shenPower) * 3;
+            const dmg = (state.yuePower + state.shenPower) * 5;
             bossHP -= dmg;
             ui.bossHp.textContent = Math.max(0, bossHP);
 
-            log(`【双剑合璧】二人默契配合，共同击出灵力暴击，击向洛冰河。（BOSS 受到 ${dmg} 点伤害）`, 'battle');
+            log(`【双剑合璧】二人默契配合，共同击出灵力暴击，击向洛冰河。（魔尊 受到 ${dmg} 点伤害）`, 'battle');
             showDamageNumber(dmg); // Show animated damage
             updateBossUI(); // Update side panel bars
 
@@ -1892,7 +1886,7 @@
         btns.bossFinish.onclick = () => {
             if (bossHP <= 0 || state.yueHealth <= 0) return;
 
-            const heal = Math.floor(state.shenPower * 0.8);
+            const heal = Math.floor(state.shenPower * 1.5);
             state.yueHealth = Math.min(100, state.yueHealth + heal);
 
             log(`【清静灵阵】沈清秋展开灵阵护住岳清源心脉。（岳清源气血恢复 ${heal}）`, 'battle');
@@ -1907,7 +1901,7 @@
             if (bossHP <= 0 || state.yueHealth <= 0) return;
 
             // Cost
-            state.yueHealth -= 30;
+            state.yueHealth -= 25;
             updateUI(); // Immediate update to show cost
             updateBossUI(); // Update side panel bars
 
@@ -1917,11 +1911,11 @@
                 return;
             }
 
-            const dmg = 2500;
+            const dmg = 3000;
             bossHP -= dmg;
             ui.bossHp.textContent = Math.max(0, bossHP);
 
-            log("【玄肃·绝杀】岳清源强行拔出玄肃，寿元燃烧！惊天剑气斩给了洛冰河重重一击！(BOSS 受到 2500 伤害)", 'battle');
+            log("【玄肃·绝杀】岳清源强行拔出玄肃，寿元燃烧！惊天剑气斩给了洛冰河重重一击！(魔尊 受到 3000 伤害)", 'battle');
             showDamageNumber(dmg); // Show animated damage
 
             bossCounterAttack();
@@ -1953,7 +1947,7 @@
                 // HAPPY ENDING
                 if (endingTitle) endingTitle.textContent = "归隐山林";
                 const endingLabel = document.getElementById('txt-ending-label-ne');
-                if (endingLabel) endingLabel.textContent = "Happy End";
+                if (endingLabel) endingLabel.textContent = "圆满结局";
 
                 showScreen('screen-ending-ne'); // Use same UI base
             }
@@ -1962,7 +1956,7 @@
                 // NEUTRAL ENDING
                 if (endingTitle) endingTitle.textContent = "退隐江湖";
                 const endingLabel = document.getElementById('txt-ending-label-ne');
-                if (endingLabel) endingLabel.textContent = "Normal End";
+                if (endingLabel) endingLabel.textContent = "普通结局";
                 showScreen('screen-ending-ne');
             }
         }
